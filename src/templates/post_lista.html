@@ -1,0 +1,716 @@
+{% extends "base.html" %}
+
+
+
+    
+
+
+
+
+
+<div class='col-sm-6 col-sm-offset-3'>
+    
+    <div class="container-fluid">
+        <h2 style="margin-right:50px; margin-top:100px">Trending</h2>  
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+      
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div class="item active">
+              <a href="http://127.0.0.1:8000/latest-tesla-price">
+              <img src="https://news.energysage.com/wp-content/uploads/2017/03/tesla.jpg" alt="Los Angeles" >
+              <div class="carousel-caption">
+                <h3>Latest Tesla Price</h3>
+                <p>Fine Car</p>
+                </div>
+              </a>
+            </div>
+      
+            <div class="item">
+              <a href="http://127.0.0.1:8000/your-life-in-3d">
+              <img src="https://www.setaswall.com/wp-content/uploads/2017/05/3D-Cubes-Abstract-1680x1050-768x480.jpg"  alt="Chicago" >
+              <div class="carousel-caption">
+                <h3>Your Life in 3D</h3>
+                <p>Nice Life</p>
+              </div>
+            </a>
+            </div>
+          
+            <div class="item">
+              <a href="http://127.0.0.1:8000/the-markets">
+              <img src="https://www.advisoryexcellence.com/wp-content/uploads/2018/03/Finance-PHOTO-1030x687.jpg"  alt="Nice">
+              <div class="carousel-caption">
+                <h3 >The Markets</h3>
+                <p>Markets and Finance</p>
+              </div>
+              </a>
+            </div>
+          </div>
+      
+          <!-- Left and right controls -->
+          
+          </a>
+        </div>
+      </div>
+      
+
+
+      {% block content %}
+      <div class='col-sm-12 col-sm-offset-3'>
+          
+      <h1></h1>
+      
+      
+      <!--div class="row masthead-block flex-row"-->
+      
+      
+      {% for obj in object_list %}
+      <div  class="row">
+      
+      <div class="col-md-14">
+      <div class="thumbnail">
+      {% if obj.image %}
+      <a href="{{ obj.get_absolute_url }}"> <img src='{{ obj.image.url }}' class='img-responsive' /></a>
+      {% endif %}
+      <div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+      {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+      <h3 class="mt-4" ><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+      {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+      {{ obj.get_markdown|truncatechars_html:120 }}
+      
+      </div>
+      </div>
+      </div>
+      <hr/>
+      </div>
+      {% endfor %}
+      
+      <div class="pagination" style="margin:60px 7px">
+        <span class="step-links">
+            {% if object_list.has_previous %}
+                <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+            {% endif %}
+      
+            <span class="current">
+                Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+            </span>
+      
+            {% if object_list.has_next %}
+                <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+            {% endif %}
+        </span>
+      </div>
+      
+      
+      
+      </div>
+      {% endblock content %}
+
+
+
+     
+{% block contenta %}
+
+
+
+<div class='col-sm-12 col-sm-offset-3'>
+<h1></h1>
+    
+
+<!--div class="row masthead-block flex-row"-->
+    
+
+{% for obj in object_lista %}
+<div class="row">
+ 
+  <div  class="col-md-14">
+  <div class="thumbnail">
+    {% if obj.image %}
+    <a href="{{ obj.get_absolute_urlafrica }}"><img src='{{ obj.image.url }}' class='img-responsive' /></a>
+    {% endif %}
+    <div class="caption post-detail-item">
+    {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+    <h3><a href='{{ obj.get_absolute_urlafrica }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+    {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+    {{ obj.get_markdown|truncatechars_html:120 }}
+    
+    </div>
+  </div>
+  </div>
+<hr/>
+</div>
+{% endfor %}
+
+
+
+</div>
+
+
+     
+{% block contente %}
+
+
+
+<div class='col-sm-12 col-sm-offset-3'>
+<h1></h1>
+    
+
+<!--div class="row masthead-block flex-row"-->
+    
+
+{% for obj in object_liste %}
+<div class="row">
+ 
+  <div  class="col-md-14">
+  <div class="thumbnail">
+    {% if obj.image %}
+    <a href="{{ obj.get_absolute_url }}"><img src='{{ obj.image.url }}' class='img-responsive' /></a>
+    {% endif %}
+    <div class="caption post-detail-item">
+    {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+    <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+    {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+    {{ obj.get_markdown|truncatechars_html:120 }}
+    
+    </div>
+  </div>
+  </div>
+<hr/>
+</div>
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock contente %}
+
+
+
+
+
+
+
+
+
+{% endblock contenta %}
+
+
+ 
+
+
+
+
+
+ 
+<!--div class="row masthead-block flex-row"-->
+
+
+{% block contentb %}
+
+
+
+<div class='col-sm-12 col-sm-offset-3'>
+        
+    
+    
+    
+    <h1 ></h1>
+    
+  
+           
+              
+              <!-- The slideshow -->
+              
+
+
+{% for obj in object_listb %}
+<div class="row">
+  <div  class="col-md-14">
+    <div class="thumbnail">
+        {% if obj.image %}
+        <a href="{{ obj.get_absolute_urlasia }}"><img  src='{{ obj.image.url }}' class='img-responsive' /></a>
+        {% endif %}
+      <div class="caption post-detail-item">
+        {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+        <h3><a href='{{ obj.get_absolute_urlasia }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+        {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+        {{ obj.get_markdown|truncatechars_html:120 }}
+        
+      </div>
+    </div>
+  </div>
+<hr/>
+</div>
+{% endfor %}
+
+
+
+</div>
+{% endblock contentb %}
+
+
+
+{% block contentc %}
+<div class='col-sm-12 col-sm-offset-3'>
+<h1 ></h1>
+
+
+<!--div class="row masthead-block flex-row"-->
+
+
+{% for obj in object_listc %}
+<div class="row">
+
+  <div class="col-md-14">
+<div class="thumbnail">
+{% if obj.image %}
+<a href="{{ obj.get_absolute_urleurope }}"><img src='{{ obj.image.url }}'  class='img-responsive' /></a>
+{% endif %}
+<div class="caption post-detail-item">
+{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+<h3><a href='{{ obj.get_absolute_urleurope }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+{% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+{{ obj.get_markdown|truncatechars_html:120 }}
+
+</div>
+</div>
+</div>
+<hr/>
+</div>
+{% endfor %}
+
+
+</div>
+{% endblock contentc %}
+
+
+
+
+
+{% block contentf %}
+<div class='col-sm-12 col-sm-offset-3'>
+    
+<h1></h1>
+
+
+<!--div class="row masthead-block flex-row"-->
+
+
+{% for obj in object_listf %}
+<div  class="row">
+
+<div class="col-md-14">
+<div class="thumbnail">
+{% if obj.image %}
+<a href="{{ obj.get_absolute_urltechnology }}"> <img src='{{ obj.image.url }}' class='img-responsive' /></a>
+{% endif %}
+<div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+<h3 class="mt-4" ><a href='{{ obj.get_absolute_urltechnology }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+{% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+{{ obj.get_markdown|truncatechars_html:120 }}
+
+</div>
+</div>
+</div>
+<hr/>
+</div>
+{% endfor %}
+
+
+</div>
+{% endblock contentf %}
+
+
+
+{% block contentg %}
+<div class='col-sm-12 col-sm-offset-3'>
+    
+<h1></h1>
+
+
+<!--div class="row masthead-block flex-row"-->
+
+
+{% for obj in object_listg %}
+<div  class="row">
+
+<div class="col-md-14">
+<div class="thumbnail">
+{% if obj.image %}
+<a href="{{ obj.get_absolute_urlnews }}"> <img src='{{ obj.image.url }}' class='img-responsive' /></a>
+{% endif %}
+<div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+<h3 class="mt-4" ><a href='{{ obj.get_absolute_urlnews }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+{% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+{{ obj.get_markdown|truncatechars_html:120 }}
+
+</div>
+</div>
+</div>
+<hr/>
+</div>
+{% endfor %}
+
+
+</div>
+{% endblock contentg %}
+
+
+
+{% block contenth %}
+<div class='col-sm-12 col-sm-offset-3'>
+    
+<h1></h1>
+
+
+<!--div class="row masthead-block flex-row"-->
+
+
+{% for obj in object_listh %}
+<div  class="row">
+
+<div class="col-md-14">
+<div class="thumbnail">
+{% if obj.image %}
+<a href="{{ obj.get_absolute_urllife }}"> <img src='{{ obj.image.url }}' class='img-responsive' /></a>
+{% endif %}
+<div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+<h3 class="mt-4" ><a href='{{ obj.get_absolute_urllife }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+{% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+{{ obj.get_markdown|truncatechars_html:120 }}
+
+</div>
+</div>
+</div>
+<hr/>
+</div>
+{% endfor %}
+
+
+</div>
+{% endblock contenth %}
+
+
+{% block contenti %}
+<div class='col-sm-12 col-sm-offset-3'>
+<h1 ></h1>
+
+
+<!--div class="row masthead-block flex-row"-->
+
+
+{% for obj in object_listi %}
+<div class="row">
+
+  <div class="col-md-14">
+<div class="thumbnail">
+{% if obj.image %}
+<a href="{{ obj.get_absolute_urlaustralia }}"><img src='{{ obj.image.url }}'  class='img-responsive' /></a>
+{% endif %}
+<div class="caption post-detail-item">
+{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+<h3><a href='{{ obj.get_absolute_urlaustralia }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+{% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+{{ obj.get_markdown|truncatechars_html:120 }}
+
+</div>
+</div>
+</div>
+<hr/>
+</div>
+{% endfor %}
+
+
+</div>
+{% endblock contenti %}
+
+
+
+{% block contentj %}
+<div class='col-sm-12 col-sm-offset-3'>
+<h1 ></h1>
+
+
+<!--div class="row masthead-block flex-row"-->
+
+
+{% for obj in object_listj %}
+<div class="row">
+
+  <div class="col-md-14">
+<div class="thumbnail">
+{% if obj.image %}
+<a href="{{ obj.get_absolute_urlus }}"><img src='{{ obj.image.url }}'  class='img-responsive' /></a>
+{% endif %}
+<div class="caption post-detail-item">
+{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+<h3><a href='{{ obj.get_absolute_urlus }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+{% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+{{ obj.get_markdown|truncatechars_html:120 }}
+
+</div>
+</div>
+</div>
+<hr/>
+</div>
+{% endfor %}
+
+
+</div>
+{% endblock contentj %}
+
+
+
+
+
+{% block contentk %}
+<div class='col-sm-12 col-sm-offset-3'>
+<h1 ></h1>
+
+
+<!--div class="row masthead-block flex-row"-->
+
+
+{% for obj in object_listk %}
+<div class="row">
+
+  <div class="col-md-14">
+<div class="thumbnail">
+{% if obj.image %}
+<a href="{{ obj.get_absolute_urltravel }}"><img src='{{ obj.image.url }}'  class='img-responsive' /></a>
+{% endif %}
+<div class="caption post-detail-item">
+{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+<h3><a href='{{ obj.get_absolute_urltravel }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+{% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+{{ obj.get_markdown|truncatechars_html:120 }}
+
+</div>
+</div>
+</div>
+<hr/>
+</div>
+{% endfor %}
+
+
+</div>
+{% endblock contentk %}
+
+
+
+{% block contentl %}
+<div class='col-sm-12 col-sm-offset-3'>
+<h1 ></h1>
+
+
+<!--div class="row masthead-block flex-row"-->
+
+
+{% for obj in object_listl %}
+<div class="row">
+
+  <div class="col-md-14">
+<div class="thumbnail">
+{% if obj.image %}
+<a href="{{ obj.get_absolute_urlfoodandhealth }}"><img src='{{ obj.image.url }}'  class='img-responsive' /></a>
+{% endif %}
+<div class="caption post-detail-item">
+{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+<h3><a href='{{ obj.get_absolute_urlfoodandhealth }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+{% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+{{ obj.get_markdown|truncatechars_html:120 }}
+
+</div>
+</div>
+</div>
+<hr/>
+</div>
+{% endfor %}
+
+
+</div>
+{% endblock contentl %}
+
+
+
+{% block contentn %}
+<div class='col-sm-12 col-sm-offset-3'>
+<h1 ></h1>
+
+
+<!--div class="row masthead-block flex-row"-->
+
+
+{% for obj in object_listn %}
+<div class="row">
+
+  <div class="col-md-14">
+<div class="thumbnail">
+{% if obj.image %}
+<a href="{{ obj.get_absolute_urlbusiness }}"><img src='{{ obj.image.url }}'  class='img-responsive' /></a>
+{% endif %}
+<div class="caption post-detail-item">
+{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+<h3><a href='{{ obj.get_absolute_urlbusiness }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+{% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+{{ obj.get_markdown|truncatechars_html:120 }}
+
+</div>
+</div>
+</div>
+<hr/>
+</div>
+{% endfor %}
+
+
+</div>
+{% endblock contentn %}
+
+
+
+
+{% block contentp %}
+<div class='col-sm-12 col-sm-offset-3'>
+<h1 ></h1>
+
+
+<!--div class="row masthead-block flex-row"-->
+
+
+{% for obj in object_listp %}
+<div class="row">
+
+  <div class="col-md-14">
+<div class="thumbnail">
+{% if obj.image %}
+<a href="{{ obj.get_absolute_urlforex }}"><img src='{{ obj.image.url }}'  class='img-responsive' /></a>
+{% endif %}
+<div class="caption post-detail-item">
+{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+<h3><a href='{{ obj.get_absolute_urlforex }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+{% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+{{ obj.get_markdown|truncatechars_html:120 }}
+
+</div>
+</div>
+</div>
+<hr/>
+</div>
+{% endfor %}
+
+
+</div>
+{% endblock contentp %}
+
+
+{% block contento %}
+<div class='col-sm-12 col-sm-offset-3'>
+<h1 ></h1>
+
+
+<!--div class="row masthead-block flex-row"-->
+
+
+{% for obj in object_listo %}
+<div class="row">
+
+  <div class="col-md-14">
+<div class="thumbnail">
+{% if obj.image %}
+<a href="{{ obj.get_absolute_urlearnmoney }}"><img src='{{ obj.image.url }}'  class='img-responsive' /></a>
+{% endif %}
+<div class="caption post-detail-item">
+{% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+<h3><a href='{{ obj.get_absolute_urlearnmoney }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+{% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+{{ obj.get_markdown|truncatechars_html:120 }}
+
+</div>
+</div>
+</div>
+<hr/>
+</div>
+{% endfor %}
+
+
+</div>
+{% endblock contento %}
+<!--section id="sect">
+    <nav id="navi">
+      <ul>
+        <li><a href="#">London</a></li>
+        <li><a href="#">Paris</a></li>
+        <li><a href="#">Tokyo</a></li>
+      </ul>
+    </nav>
+    
+    <article id="arti">
+      <h1>London</h1>
+      <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+      <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+    </article>
+  </section-->
+
+     
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<form method='GET' action='' class='row'>
+        <div class='col-sm-6'>
+            <div class='input-group'>
+                <input class='form-control' type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
+                <span class='input-group-btn'>
+                    <--<input class='btn btn-default' type='submit' value='Search' />
+                    <button class='btn btn-default' type='submit'> <i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </form>-->
+
+
+
+
+
+
+
+
+<!--<form method='GET' action='' class='row'>
+        <div class='col-sm-6'>
+            <div class='input-group'>
+                <input class='form-control' type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
+                <span class='input-group-btn'>
+                    <--<input class='btn btn-default' type='submit' value='Search' />
+                    <button class='btn btn-default' type='submit'> <i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </form>-->

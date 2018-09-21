@@ -1,0 +1,896 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>{% block head_title %}Finance Zone{% endblock head_title %}</title>
+    <link rel="shortcut icon" type="image/jpg" href='{% static "images/financezone.png" %}'>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href='{% static "font-awesome/css/font-awesome.min.css" %}' rel="stylesheet">
+  <link href='{% static "font-awesome/css/font-awesome.css" %}' rel="stylesheet">
+      <!-- Custom fonts for this template -->
+     
+ 
+      <script>
+          // Place this code in the head section of your HTML file 
+          (function(r, d, s) {
+            r.loadSkypeWebSdkAsync = r.loadSkypeWebSdkAsync || function(p) {
+              var js, sjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(p.id)) { return; }
+              js = d.createElement(s);
+              js.id = p.id;
+              js.src = p.scriptToLoad;
+              js.onload = p.callback
+              sjs.parentNode.insertBefore(js, sjs);
+            };
+            var p = {
+              scriptToLoad: 'https://swx.cdn.skype.com/shared/v/latest/skypewebsdk.js',
+              id: 'skype_web_sdk'
+            };
+            r.loadSkypeWebSdkAsync(p);
+          })(window, document, 'script');
+          </script>
+</head>
+<link rel='stylesheet' href='{% static "css/base.css" %}' />
+<style>
+{% block style %}{% endblock style %}
+</style>
+<style>
+    footer .glyphicon {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: #f4511e;
+        height:800px;
+        width:100%;
+        background-color:white;
+    }
+    </style>
+{% block head_extra %} {% endblock head_extra %}
+</head>
+<body>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- Navigation -->
+<!--nav id="fc" class="navbar navbar-inverse" style="display:inline-block">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" style="color:#18d26e" href='{% url "posts:list" %}'>FINANCE<i style="color:white;"> NIGERIA</i></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+      
+        <li class="dropdown nav-item" >
+          <a class="dropdown-toggle" style="color:#18d26e" data-toggle="dropdown" href=''>Global <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              
+          <li ><a style="color:#18d26e" href='{% url "posts:afri" %}'>Africa</a></li>
+          <li ><a style="color:#18d26e" href='{% url "posts:asi" %}'>Asia</a></li>
+          <li ><a style="color:#18d26e" href='{% url "posts:amer" %}'>Americas</a></li>
+          <li ><a style="color:#18d26e" href='{% url "posts:aust" %}'>Australia</a></li>
+          
+          <li ><a style="color:#18d26e" href='{% url "posts:euro" %}'>Europe</a></li>
+          
+          <li><a style="color:#18d26e" href='{% url "posts:us" %}'>US</a></li>
+        </ul>
+        </li>
+      </li>
+      <li class="dropdown nav-item">
+        <a class="dropdown-toggle" style="color:#18d26e" data-toggle="dropdown" href=''>Money and Business <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a style="color:#18d26e" href='{% url "posts:busi" %}'>Business</a></li>
+          
+          <li><a style="color:#18d26e" href='{% url "posts:earn" %}'>Earn Money</a></li>
+          <li><a style="color:#18d26e" href='{% url "posts:fore" %}'>Forex</a></li>
+          
+        
+        </ul>
+      </li>
+      <li class="nav-item"><a style="color:#18d26e" href='{% url "posts:tech" %}'>Tech</a></li>
+      <li class="nav-item"><a style="color:#18d26e" href='{% url "posts:news" %}'>News</a></li>
+      <li class="dropdown nav-item">
+        <a class="dropdown-toggle" style="color:#18d26e" data-toggle="dropdown" href=''>Life<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a style="color:#18d26e" href='{% url "posts:busi" %}'>Lifestyle</a></li>
+          <li><a style="color:#18d26e" href='{% url "posts:food" %}'>Food and Health</a></li>
+          <li><a style="color:#18d26e" href='{% url "posts:trav" %}'>Travel</a></li>
+          
+      </ul>
+      <ul class="nav navbar-nav navbar-right mr-auto"></ul>
+      {% if not request.user.is_authenticated %}
+      <li class="nav-item"><a style="color:#18d26e" href='{% url "register" %}'><span class="glyphicon glyphicon-user"></span> Register</a></li>
+      <li class="nav-item"><a style="color:#18d26e" href='{% url "login" %}'><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      {% else %}
+      <li class="nav-item "><a style="color:#18d26e" href='{% url "logout" %}'><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      {% endif %}
+        
+      <li class="nav-item"> <form action="/" class="form-inline my-2 my-lg-0" style="padding-top:10px; padding-bottom:20px" method="get">
+            <input class="form-control mr-sm-2" type='text' name='q' placeholder="Search" aria-label="Search" id="mobile-search-term" aria-describedby="mobile-search-icon" value='{{ request.GET.q }}'/>
+            
+            
+            <button class="btn btn-outline-success my-2 my-sm-0" style="color:#18d26e" type="submit">Search</button>
+          </form></li></ul>
+        
+      </ul>
+    </div>
+  </div>
+</nav-->
+<header id="header">
+  <div class="container-fluid">
+
+    <div id="logo" class="pull-left">
+      <h1><a href='{% url "posts:list" %}' class="scrollto" style="text-decoration:none;">Finance Zone</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+    </div>
+    
+    <nav id="nav-menu-container" >
+      <ul class="nav-menu">
+          <li class="menu-active"><a href='{% url "posts:list" %}'>Home</a></li>
+        
+        <li class="menu-has-children"><a href='{% url "posts:mone" %}'>Money and Business </a>
+          
+          <ul>
+              <li><a href='{% url "posts:busi" %}'>Business</a></li>
+              <li><a href='{% url "posts:bank" %}'>Banking</a></li>
+              <li><a href='{% url "posts:inve" %}'>Investment</a></li>
+              <li><a href='{% url "posts:earn" %}'>Earn Money</a></li>
+              <li><a href='{% url "posts:fore" %}'>Forex</a></li>
+              
+              
+           
+          </ul>
+        </li>
+        <li class="menu-has-children"><a href='{% url "posts:glob" %}'>Global</a>
+          
+          <ul>
+
+              <li ><a href='{% url "posts:afri" %}'>Africa</a></li>
+              <li ><a href='{% url "posts:asi" %}'>Asia</a></li>
+              <li ><a href='{% url "posts:amer" %}'>Americas</a></li>
+              <li ><a href='{% url "posts:aust" %}'>Australia</a></li>
+              
+              <li ><a href='{% url "posts:euro" %}'>Europe</a></li>
+              
+              <li><a href='{% url "posts:us" %}'>US</a></li>
+              <li><a href='{% url "posts:uk" %}'>UK</a></li>
+              
+           
+          </ul>
+        </li>
+
+
+        <li class="nav-item"><a href='{% url "posts:tech" %}'>Tech</a></li>
+        <li class="menu-has-children"><a href='{% url "posts:news" %}'>News</a>
+          
+          <ul>
+
+              <li ><a href='{% url "posts:spor" %}'>Sports</a></li>
+              <li ><a href='{% url "posts:ente" %}'>Entertainment</a></li>
+              
+              
+           
+          </ul>
+        </li>
+
+        <li class="menu-has-children"><a href='{% url "posts:life" %}'>Life</a>
+          
+          <ul>
+
+              <li ><a href='{% url "posts:lifes" %}'>Lifestyle</a></li>
+              <li ><a href='{% url "posts:food" %}'>Food And Health</a></li>
+              <li ><a href='{% url "posts:trav" %}'>Travel</a></li>
+              <li ><a href='{% url "posts:educ" %}'>Education</a></li>
+
+
+              
+          </ul>
+        </li>
+        <!--{% if not request.user.is_authenticated %}
+      <li><a href='{% url "register" %}'><span class="glyphicon glyphicon-user"></span> Register</a></li>
+      <li ><a href='{% url "login" %}'><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      {% else %}
+      <li><a href='{% url "logout" %}'><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      {% endif %}
+      <li> </li-->
+      <li></li>
+      <li></li>
+      </ul>
+    </nav><!-- #nav-menu-container -->
+  </div>
+</header>
+    
+   
+
+  <!-- Page Header -->
+  <!-- #intro -->
+  <!--section id="intro">
+      <div class="intro-container">
+        <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+  
+          <ol class="carousel-indicators"></ol>
+  
+          <div class="carousel-inner" role="listbox">
+  
+            <div class="carousel-item active">
+              <div class="carousel-background"><img src='{% static "images/finance1.jpg" %}' alt=""></div>
+              <div class="carousel-container">
+                <div class="carousel-content">
+                  <h2>We are professional</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="carousel-item">
+              <div class="carousel-background"><img src='{% static "images/finance2.jpg" %}' alt=""></div>
+              <div class="carousel-container">
+                <div class="carousel-content">
+                  <h2>At vero eos et accusamus</h2>
+                  <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut.</p>
+                  <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="carousel-item">
+              <div class="carousel-background"><img src='{% static "images/finance3.jpg" %}' alt=""></div>
+              <div class="carousel-container">
+                <div class="carousel-content">
+                  <h2>Temporibus autem quibusdam</h2>
+                  <p>Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt omnis iste natus error sit voluptatem accusantium.</p>
+                  <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="carousel-item">
+              <div class="carousel-background"><img src="src='{% static "images/finance5.jpg" %}'" alt=""></div>
+              <div class="carousel-container">
+                <div class="carousel-content">
+                  <h2>Nam libero tempore</h2>
+                  <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum.</p>
+                  <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="carousel-item">
+              <div class="carousel-background"><img src="img/intro-carousel/5.jpg" alt=""></div>
+              <div class="carousel-container">
+                <div class="carousel-content">
+                  <h2>Magnam aliquam quaerat</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+  
+          <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+  
+          <a class="carousel-control-next" href="#introCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+  
+        </div>
+      </div>
+    </section-->
+    
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:100%; width:100%">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+    
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+    
+          <div class="item active">
+            <img src='{% static "images/finance1.jpg" %}' alt="Los Angeles" style="width:100%;">
+            <div class="carousel-caption">
+              <h3>Welcome to Finance Zone</h3>
+              <p>All About The World of Finance</p>
+            </div>
+          </div>
+    
+          <div class="item">
+            <img src='{% static "images/finance5.jpg" %}' alt="Chicago" style="width:100%;">
+            <div class="carousel-caption">
+              <h3>Welcome To Finance Zone</h3>
+              <p>Bringing You The Latest News And Information In The World Of Finance </p>
+            </div>
+          </div>
+        
+          <div class="item">
+            <img src='{% static "images/finance3.jpg" %}' alt="New York" style="width:100%;">
+            <div class="carousel-caption">
+              <h3>Welcome To Finance Zone</h3>
+              <p>Learn To Manage Your Finances</p>
+            </div>
+          </div>
+      
+                  
+          <div class="item">
+            <img src='{% static "images/finance4.jpg" %}' alt="New York" style="width:100%;">
+            <div class="carousel-caption">
+              <h3>Welcome To Finance Zone</h3>
+              <p>Know More About Business And Investments In Nigeria And Worldwide</p>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Left and right controls -->
+       
+      </div>
+    
+    
+
+
+  {% block content %}{% endblock content %}
+
+
+<aside class="col-sm-3" style="margin-left:20px;padding-right:26px;"><p>
+    
+    <div class="panel panel-default">
+        <div class="panel-heading" style="color:#18d26e">Search Posts</div>
+        <div class="panel-body"><form action="/" class="form-inline my-2 my-lg-0" style="padding-top:10px; padding-bottom:20px" method="get">
+          <input class="form-control mr-sm-2" type='text' name='q' placeholder="Enter keyword..." aria-label="Search" id="mobile-search-term" aria-describedby="mobile-search-icon" value='{{ request.GET.q }}'/>
+          
+          
+          <button class="btn btn-outline-success my-2 my-sm-0" style="color:#18d26e" type="submit">Search</button>
+        </form></div>
+        
+    </div>
+
+
+           
+ 
+  <a href='{% url "posts:mone" %}' style="color: white;"><h2 id="aside_header" style="padding-top:30px; font:20px bold Wildwest; border-bottom: 2px solid #18d26e; color:#18d26e" >MONEY AND BUSINESS</h2></a>
+  {% for obj in object_listb %}
+  <div class="panel panel-success">
+     
+    <div  class="panel-heading"> <a href='{% url "posts:busi" %}' style="color:#18d26e; font:20px bold Tahoma">Business</a></div>
+    <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+    
+  </div>{% endfor %}
+  {% for obj in object_listc %}
+  <div class="panel panel-success">
+     
+    <div  class="panel-heading"> <a href='{% url "posts:bank" %}' style="color:#18d26e; font:20px bold Tahoma">Banking</a></div>
+    <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+    
+  </div>{% endfor %}
+  {% for obj in object_listd %}
+  <div class="panel panel-success">
+     
+    <div  class="panel-heading"> <a href='{% url "posts:inve" %}' style="color:#18d26e; font:20px bold Tahoma">Investment</a></div>
+    <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+    
+  </div>{% endfor %}
+  {% for obj in object_liste %}
+  <div class="panel panel-success">
+     
+    <div  class="panel-heading"> <a href='{% url "posts:earn" %}' style="color:#18d26e; font:20px bold Tahoma">Earn Money</a></div>
+    <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+    
+  </div>{% endfor %}
+  {% for obj in object_listf %}
+  <div class="panel panel-success">
+     
+    <div  class="panel-heading"> <a href='{% url "posts:fore" %}' style="color:#18d26e; font:20px bold Tahoma">Forex</a></div>
+    <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+    
+  </div>{% endfor %}
+  <a href='{% url "posts:glob" %}' style="color: white;"><h2 style="font:20px bold Wildwest; border-bottom: 2px solid #18d26e; color:#18d26e" id="aside_header">GLOBAL</h2></a>
+  {% for obj in object_listg %}
+  <div class="panel panel-success">
+     
+    <div  class="panel-heading"> <a href='{% url "posts:afri" %}' style="color:#18d26e; font:20px bold Tahoma">Africa</a></div>
+    <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+    
+  </div>{% endfor %}
+  {% for obj in object_listh %}
+  <div class="panel panel-success">
+     
+    <div  class="panel-heading"> <a href='{% url "posts:asi" %}' style="color:#18d26e; font:20px bold Tahoma">Asia</a></div>
+    <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+    
+  </div>{% endfor %}
+  {% for obj in object_listi %}
+  <div class="panel panel-success">
+     
+    <div  class="panel-heading"> <a href='{% url "posts:amer" %}' style="color:#18d26e; font:20px bold Tahoma">Americas</a></div>
+    <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+    
+  </div>{% endfor %}
+  {% for obj in object_listj %}
+  <div class="panel panel-success">
+     
+    <div  class="panel-heading"> <a href='{% url "posts:aust" %}' style="color:#18d26e; font:20px bold Tahoma">Australia</a></div>
+    <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+    
+  </div>{% endfor %}
+  {% for obj in object_listk %}
+  <div class="panel panel-success">
+     
+    <div  class="panel-heading"> <a href='{% url "posts:euro" %}' style="color:#18d26e; font:20px bold Tahoma">Europe</a></div>
+    <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+    
+  </div>{% endfor %}
+
+  {% for obj in object_listl %}
+  <div class="panel panel-success">
+     
+    <div  class="panel-heading"> <a href='{% url "posts:us" %}' style="color:#18d26e; font:20px bold Tahoma">USA</a></div>
+    <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+    
+  </div>{% endfor %}
+
+  {% for obj in object_listm %}
+  <div class="panel panel-success">
+     
+    <div  class="panel-heading"> <a href='{% url "posts:uk" %}' style="color:#18d26e; font:20px bold Tahoma">UK</a></div>
+    <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+    
+  </div>{% endfor %}
+  
+
+
+  
+<a href='{% url "posts:tech" %}' style="color: white;"><h2 id="aside_header" style="padding-top:30px; font:20px bold Wildwest; border-bottom: 2px solid #18d26e; color:#18d26e">TECH</h2></a>
+  
+{% for obj in object_listn %}
+<div class="panel panel-success">
+   
+  <div  class="panel-heading"> <a href='{% url "posts:tech" %}' style="color:#18d26e; font:20px bold Tahoma">Tech</a></div>
+  <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+  
+</div>{% endfor %}
+    <a href='{% url "posts:news" %}' style="color: white;"><h2 id="aside_header" style="padding-top:30px; font:20px bold Wildwest; border-bottom: 2px solid #18d26e; color:#18d26e">NEWS</h2></a>
+    {% for obj in object_listo %}
+    <div class="panel panel-success">
+       
+      <div  class="panel-heading"> <a href='{% url "posts:spor" %}' style="color:#18d26e; font:20px bold Tahoma">Sports</a></div>
+      <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+      
+    </div>{% endfor %}
+    {% for obj in object_listp %}
+    <div class="panel panel-success">
+       
+      <div  class="panel-heading"> <a href='{% url "posts:ente" %}' style="color:#18d26e; font:20px bold Tahoma">Entertainment</a></div>
+      <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+      
+    </div>{% endfor %}
+    <a href='{% url "posts:life" %}' style="color: white;"> <h2 id="aside_header" style="padding-top:30px; font:20px bold Wildwest; border-bottom: 2px solid #18d26e; color:#18d26e">LIFE</h2></a>
+    {% for obj in object_listq %}
+    <div class="panel panel-success">
+       
+      <div  class="panel-heading"> <a href='{% url "posts:lifes" %}' style="color:#18d26e; font:20px bold Tahoma">Lifestyle</a></div>
+      <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+      
+    </div>{% endfor %}
+   
+    {% for obj in object_listr %}
+    <div class="panel panel-success">
+       
+      <div  class="panel-heading"> <a href='{% url "posts:food" %}' style="color:#18d26e; font:20px bold Tahoma">Food And Health</a></div>
+      <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+      
+    </div>{% endfor %}
+   
+    {% for obj in object_lists %}
+    <div class="panel panel-success">
+       
+      <div  class="panel-heading"> <a href='{% url "posts:trav" %}' style="color:#18d26e; font:20px bold Tahoma">Travel</a></div>
+      <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+      
+    </div>{% endfor %}
+    {% for obj in object_listt %}
+    <div class="panel panel-success">
+       
+      <div  class="panel-heading"> <a href='{% url "posts:educ" %}' style="color:#18d26e; font:20px bold Tahoma">Education</a></div>
+      <div class="panel-body">{% if obj.image %}<a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:200px; width:100%"/></a>{% endif %}<h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:20px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a></h3></div>
+      
+    </div>{% endfor %}
+
+  
+
+
+  
+
+
+</p></aside>
+
+
+
+
+<section class='col-sm-8 col-sm-offset-1'>
+    <h2 id="aside_header" style="padding-top:20px; font:24px bold Wildwest; border-bottom: 2px solid #18d26e; color:#18d26e">{{ titlea }}</h2>
+    
+
+    
+    
+    
+    <!--div class="row masthead-block flex-row"-->
+    
+    
+    {% for obj in object_lista %}     
+    <div  class="col-sm-3">
+        
+      <!--div class="col-sm-14"-->
+      <div class="row-sm-2">
+          
+        <div class="card" style=" min-height:29rem;">
+          
+       
+            {% if obj.image %}
+      <a  href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" style="height:100%; width:100%"/></a>
+
+
+      {% endif %}
+      <h3 class="mt-4" style="font:10px"><a  style="color:rgb(0, 0, 0); font:18px bold Tahoma" href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small style="font:10px bold Tahoma">{{ obj.publish }}</small></h3>
+      {% if obj.user.get_full_name %}<p style="font:13px bold Tahoma">Author: {{ obj.user.get_full_name }}</p>{% endif %}
+            
+      <div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+      </div>
+      
+    </div>
+      
+      
+     </div>
+   
+    
+       
+    
+           </div>
+           {% endfor %}
+          
+          
+     
+    
+    </section>
+
+<section class='col-sm-8 col-sm-offset-1'>
+<h2 id="aside_header" style="padding-top:20px; font:24px bold Wildwest; border-bottom: 2px solid #18d26e; color:#18d26e">RECOMMENDED</h2>
+
+  
+
+
+
+<!--div class="row masthead-block flex-row"-->
+
+<div class='container-fluid'>
+<div  class="row">
+  
+  <!--div class="col-sm-14"-->
+  <div class="col-sm-3">
+  <div class="thumbnail">
+  <a href="{{ obj.get_absolute_url }}"><img src="http://activ.com.sg/wp-content/uploads/2017/12/IoT-Activ-Technology.jpg" /></a>
+  jnklnknlk
+  
+  <div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+  
+  <h3 class="mt-4"><a  style="color:rgb(0, 0, 0); font:30px bold Tahoma" href='{{ obj.get_absolute_url }}'>
+  
+  
+  </div>
+  </div>
+ </div>
+  
+
+    <!--div class="col-sm-14"-->
+    <div class="col-sm-3">
+    <div class="thumbnail">
+    <a href="{{ obj.get_absolute_url }}"><img src="http://activ.com.sg/wp-content/uploads/2017/12/IoT-Activ-Technology.jpg" /></a>
+    jnklnknlk
+    
+    <div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+    
+    <h3 class="mt-4"><a  style="color:rgb(0, 0, 0); font:30px bold Tahoma" href='{{ obj.get_absolute_url }}'>
+    
+
+      
+    
+    </div>
+    </div>
+    </div>
+    
+    <div class="col-sm-3">
+      <div class="thumbnail">
+      <a href="{{ obj.get_absolute_url }}"><img src="http://activ.com.sg/wp-content/uploads/2017/12/IoT-Activ-Technology.jpg" /></a>
+      jnklnknlk
+      
+      <div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+      
+      <h3 class="mt-4"><a  style="color:rgb(0, 0, 0); font:30px bold Tahoma" href='{{ obj.get_absolute_url }}'>
+      
+  
+        
+      
+      </div>
+      </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="thumbnail">
+        <a href="{{ obj.get_absolute_url }}"><img src="http://activ.com.sg/wp-content/uploads/2017/12/IoT-Activ-Technology.jpg" /></a>
+        jnklnknlk
+        
+        <div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+        
+        <h3 class="mt-4"><a  style="color:rgb(0, 0, 0); font:30px bold Tahoma" href='{{ obj.get_absolute_url }}'>
+        
+    
+          
+        
+        </div>
+        </div>
+        </div>
+
+      <!--div class="col-sm-14"-->
+      <div class="col-sm-3">
+        <div class="thumbnail">
+        <a href="{{ obj.get_absolute_url }}"><img src="http://activ.com.sg/wp-content/uploads/2017/12/IoT-Activ-Technology.jpg" /></a>
+        jnklnknlk
+        
+        <div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+        
+        <h3 class="mt-4"><a  style="color:rgb(0, 0, 0); font:30px bold Tahoma" href='{{ obj.get_absolute_url }}'>
+        
+    
+          
+        
+        </div>
+        </div>
+        </div>
+       
+        <div class="col-sm-3">
+          <div class="thumbnail">
+          <a href="{{ obj.get_absolute_url }}"><img src="http://activ.com.sg/wp-content/uploads/2017/12/IoT-Activ-Technology.jpg" /></a>
+          jnklnknlk
+          
+          <div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+          
+          <h3 class="mt-4"><a  style="color:rgb(0, 0, 0); font:30px bold Tahoma" href='{{ obj.get_absolute_url }}'>
+          
+      
+            
+          
+          </div>
+          </div>
+          </div>
+
+
+          <div class="col-sm-3">
+            <div class="thumbnail">
+            <a href="{{ obj.get_absolute_url }}"><img src="http://activ.com.sg/wp-content/uploads/2017/12/IoT-Activ-Technology.jpg" /></a>
+            jnklnknlk
+            
+            <div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+            
+            <h3 class="mt-4"><a  style="color:rgb(0, 0, 0); font:30px bold Tahoma" href='{{ obj.get_absolute_url }}'>
+            
+        
+              
+            
+            </div>
+            </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="thumbnail">
+              <a href="{{ obj.get_absolute_url }}"><img src="http://activ.com.sg/wp-content/uploads/2017/12/IoT-Activ-Technology.jpg" /></a>
+              jnklnknlk
+              
+              <div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+              
+              <h3 class="mt-4"><a  style="color:rgb(0, 0, 0); font:30px bold Tahoma" href='{{ obj.get_absolute_url }}'>
+              
+          
+                
+              
+              </div>
+              </div>
+              </div>
+     
+
+
+       </div>
+      </div>
+  
+ 
+      
+</section>
+
+
+
+<footer id="footer" style="height:100%; bottom:0; display:inline-block" class="container-fluid">
+  <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3 style="color:white">Finance Zone</h3>
+            <p >
+              Welcome to Finance Zone, your major store for financial information in Nigeria, around the world and in all things.!
+            </p><p>Most importantly, the Finance Zone team is committed to one goal and that alone: assisting our readers identify their top financial goals and reach them. It doesn’t matter what financial state you are in, we are absolutely commited to give you information that will guide and help you make your financial decisions.</p>
+            
+            
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="ion-ios-arrow-right"></i> <a href='{% url "posts:list" %}'>Home</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href='{% url "posts:abou" %}'>About us</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href='{% url "posts:disc" %}'>Disclaimer</a></li>
+              
+              <li><i class="ion-ios-arrow-right"></i> <a href='{% url "posts:priv" %}'>Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4 >Contact Us</h4>
+            <p >
+              500102, Port Harcourt <br>
+              Rivers State<br>
+              Nigeria <br>
+              <strong>Phone:</strong> 07068541453<br>
+              <strong>Email(s): </strong> financezone@gmail.com and financezone@yahoo.com<br>
+              <strong></strong><br>
+            </p>
+
+            <!--div class="social-links">
+              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            </div-->
+
+          </div>
+
+          <!--div class="col-lg-3 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit"  value="Subscribe">
+            </form>
+          </div-->
+           <div class="col-lg-3 col-md-6 footer-newsletter">
+           <img src='{% static "images/financezone.png" %}' style="width:100%; height:50%" />
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>FinanceZone</strong>2018. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!--
+          All the links in the footer should remain intact.
+          You can delete the links only if you purchased the pro version.
+          Licensing information: https://bootstrapmade.com/license/
+          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=BizPage
+        -->
+        Designed by <a >ChidoKelson</a>
+      </div>
+    </div>
+</footer>
+
+
+<!--footer class="container-fluid text-center" style="position:sticky; margin-left:450px; margin-top:550px" >
+    <a href="#myPage" title="To Top">
+        <span></span>
+    </a>
+    <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p> 
+  </footer-->
+
+
+<!-- Latest compiled and minified JavaScript -->
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js'></script>
+
+<script class="container-fluid" type="text/javascript">
+$(document).ready(function(){
+$(".content-markdown").each(function(){
+        var content = $(this).text()
+        var markedContent = marked(content)
+        $(this).html(markedContent)
+})
+$(".post-detail-item img").each(function(){
+
+        $(this).addClass("img-responsive");
+})
+
+
+
+var contentInput = $("#id_content");
+
+function setContent(value){
+    var markedContent = marked(value)
+    $("#preview-content").html(markedContent)
+    $("#preview-content img").each(function(){
+        $(this).addClass("img-responsive")
+    })
+}
+setContent(contentInput.val())
+
+contentInput.keyup(function(){
+    var newContent = $(this).val()
+    setContent(newContent)
+})
+
+var titleInput = $("#id_title");
+
+
+
+function setTitle(value) {
+    $("#preview-title").text(value)
+}
+setTitle(titleInput.val())
+
+titleInput.keyup(function(){
+    var newContent = $(this).val()
+    setTitle(newContent)
+})
+
+$(".comment-reply-btn").click(function(event){
+    event.preventDefault();
+    $(this).parent().next(".comment-reply").fadeToggle();
+})
+
+
+
+// preview-content
+
+})
+
+
+
+
+</script>
+  <script src='{% static "jquery/jquery.min.js" %}'></script>
+  <script src='{% static "jquery/jquery-migrate.min.js" %}'></script>
+  <script src='{% static "js/main.js" %}'></script>
+  
+  <script src='{% static "superfish/hoverIntent.js" %}'></script>
+  <script src='{% static "superfish/superfish.min.js" %}'></script>
+  <script src='{% static "superfish/superfish.js" %}'></script>
+  <script src='{% static "wow/wow.min.js" %}'></script>
+  <script src='{% static "wow/wow.js" %}'></script>
+
+</body>
+</html>

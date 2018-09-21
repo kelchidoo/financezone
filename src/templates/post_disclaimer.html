@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+
+
+    
+
+
+
+
+
+
+
+      {% block content %}
+      <div class='col-sm-7 col-sm-offset-1'>
+          
+      <h1  style="color:#18d26e; font:bold 25px Tahoma">{{ title }}</h1>
+      <div  class="row">
+        
+        <!--div class="col-sm-14"-->
+       <div class="card-body">
+
+
+
+        <p><br/>All opinions expressed on this blog are solely those of Finance Zone and are in no way at all affiliated with any other organization or institution. Since we don’t know or comprehend the risk profile or time horizon of other investors, any information or opinions contained on this website are not intended to make you place an investment. This blog is intended to share our opinions, give you the latest news and not compel you into making a particular investment. We'd advice you do the research yourself and pick your own options with your money based on your peculiar situation.
+              <br/><br/>  
+            We cannot ascertain the future, therefore you will not find any forecasts of what the future holds for your investments, the markets or the economy. Truthfully, there are way too many constraints to be able to predict the future, especially as regards finances. Past performance is not an indicator of future results. Any former data used on this website is done for the sole purpose of using what has happened in the past to construct a pattern for how you can see the present situation and make knowledgeable resolves about the future.
+              <br/> <br/> 
+            You need to be aware of the risks involved when investing in financial assets. Any perspective conversed about here is done for the primary purpose of putting personal finance, investments, financial markets and the behaviour of the market into an intelligent viewpoint. The news here is to make you know the present state of a business, or an economy before investing. Take note, investments may fluctuate in value, even if it is discussed here. Once more, these are opinions and information to enable you make good decisions as regards your business, investment and finance.
+        <br/><br/>
+                
+                Finance Zone is in no way responsible for any mistakes that you make. We can't run from mistakes. We come across them all the time.
+                So next time you make a mistake hold yourself accountable, learn from it and try not to make the same mistake again.  You have a very good idea of your financial situation, so research apprpriately and carry out good findings as you read this blog or any other information out there to make your financial decisions. 
+                <br/><br/>
+                <h4>LINK DISCLAIMER</h4>
+                We also share wonderful thoughts and opinions of others so do not run off with that either. We are not endorsing opinions and advice of others, we are only giving you extra information.
+                <br/><br/>
+                <h4>ADVERTISING DISCLAIMER</h4>
+                There are some ads placed on this site but these do constitute an endorsement by Finance Zone of the products being advertised.  We are not connected with any of these products in any way.
+                <br/><br/>
+                <p>Thanks for reading. Feel free to always leave a comment or ask a question as you read.</p>
+            </p>
+           
+    
+    
+    </div>
+    </div>
+
+     
+      <!--div class="row masthead-block flex-row"-->
+      
+      
+     
+      
+      <!--div class="pagination" style="margin:60px 7px">
+        <span class="step-links">
+            {% if object_list.has_previous %}
+                <a style="color:#18d26e" href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+            {% endif %}
+      
+            <span class="current">
+                Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+            </span>
+      
+            {% if object_list.has_next %}
+                <a style="color:#18d26e" href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+            {% endif %}
+        </span>
+      </div>
+      
+      
+      
+      </div-->
+
+      
+    
+</div>
+      {% endblock content %}

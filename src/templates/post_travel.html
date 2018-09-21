@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+      {% block content %}
+      <div class='col-sm-7 col-sm-offset-1'>
+          
+            <h1  style="color:#18d26e">{{ title }}</h1>
+      
+      
+      <!--div class="row masthead-block flex-row"-->
+      
+      
+      {% for obj in object_list %}
+      <div  class="row">
+      
+      <div class="col-sm-12">
+      <div class="thumbnail">
+      {% if obj.image %}
+      <a href="{{ obj.get_absolute_urltravel }}"> <img style="height:100%; width:100%" src='{{ obj.image.url }}' class='img-responsive' /></a>
+      {% endif %}
+      <div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+      {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+      <h3><a style="color:rgb(0, 0, 0); font:33px bold Tahoma" href='{{ obj.get_absolute_urltravel }}'>{{ obj.title }}</a>  <small style="font:5px; color: #777777;">{{ obj.publish }} |<a style="font:3px; color: #777777;"> {{ obj.timestamp|timesince }} ago</a></small></h3>
+      {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+      {{ obj.get_markdown|truncatechars_html:120 }}
+      <p><a href="{{ obj.get_absolute_urltravel }}" class="btn btn-success" role="button">Read More</a></p>
+      </div>
+      </div>
+      </div>
+      <hr/>
+      </div>
+      {% endfor %}
+      
+      {% if object_list.has_other_pages %}
+      <ul class="pagination" >
+        {% if object_list.has_previous %}
+          <li><a style="background-color: white;color: #18d26e;" href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled" ><span>&laquo;</span></li>
+          {% endif %}
+        {% for i in object_list.paginator.page_range %}
+          {% if object_list.number == i %}
+            <li class="active"><span style="background-color: #18d26e;color: white;">{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li ><a style="background-color: white;color: #18d26e;" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if object_list.has_next %}
+          <li><a style="background-color: white;color: #18d26e;"href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled" ><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    
+</div>
+      {% endblock content %}
+
+
+

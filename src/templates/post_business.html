@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+
+
+    
+
+
+
+
+
+<div class='col-sm-6 col-sm-offset-3'>
+    
+    <div class="container-fluid">
+        <h2 style="margin-right:50px; margin-top:100px">Trending</h2>  
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+      
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div class="item active">
+              <a href="http://127.0.0.1:8000/latest-tesla-price">
+              <img src="https://news.energysage.com/wp-content/uploads/2017/03/tesla.jpg" alt="Los Angeles" >
+              <div class="carousel-caption">
+                <h3>Latest Tesla Price</h3>
+                <p>Fine Car</p>
+                </div>
+              </a>
+            </div>
+      
+            <div class="item">
+              <a href="http://127.0.0.1:8000/your-life-in-3d">
+              <img src="https://www.setaswall.com/wp-content/uploads/2017/05/3D-Cubes-Abstract-1680x1050-768x480.jpg"  alt="Chicago" >
+              <div class="carousel-caption">
+                <h3>Your Life in 3D</h3>
+                <p>Nice Life</p>
+              </div>
+            </a>
+            </div>
+          
+            <div class="item">
+              <a href="http://127.0.0.1:8000/the-markets">
+              <img src="https://www.advisoryexcellence.com/wp-content/uploads/2018/03/Finance-PHOTO-1030x687.jpg"  alt="Nice">
+              <div class="carousel-caption">
+                <h3 >The Markets</h3>
+                <p>Markets and Finance</p>
+              </div>
+              </a>
+            </div>
+          </div>
+      
+          <!-- Left and right controls -->
+          
+          </a>
+        </div>
+      </div>
+      
+
+
+      {% block content %}
+      <div class='col-sm-7 col-sm-offset-1'>
+          
+      <h1  style="color:#18d26e">{{ title }}</h1>
+      
+      
+      <!--div class="row masthead-block flex-row"-->
+      
+      
+      {% for obj in object_list %}
+      <div  class="row">
+      
+      <!--div class="col-sm-14"-->
+     <div class="col-sm-12">
+      <div class="thumbnail">
+      {% if obj.image %}
+      <a href="{{ obj.get_absolute_urlbusiness }}"> <img style="height:100%; width:100%" src='{{ obj.image.url }}' class='img-responsive' /></a>
+      {% endif %}
+      <div  class="caption post-detail-item" ><!--/div>class="card-title card-title-small"-->
+      {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
+      <h3><a  style="color:rgb(0, 0, 0); font:33px bold Tahoma" href='{{ obj.get_absolute_urlbusiness }}'>{{ obj.title }}</a>  <small style="font:3px; color: #777777;">{{ obj.publish }} |<a style="font:3px; color: #777777;"> {{ obj.timestamp|timesince }} ago</a></small></h3>
+      {{ obj.get_markdown|truncatechars_html:120 }}
+      <p><a href="{{ obj.get_absolute_urlbusiness }}" class="btn btn-success" role="button">Read More</a></p>
+      </div>
+      </div>
+      </div>
+      <hr/>
+      </div>
+      {% endfor %}
+      
+      {% if object_list.has_other_pages %}
+      <ul class="pagination" >
+        {% if object_list.has_previous %}
+          <li><a style="background-color: white;color: #18d26e;" href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled" ><span>&laquo;</span></li>
+          {% endif %}
+        {% for i in object_list.paginator.page_range %}
+          {% if object_list.number == i %}
+            <li class="active"><span style="background-color: #18d26e;color: white;">{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li ><a style="background-color: white;color: #18d26e;" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if object_list.has_next %}
+          <li><a style="background-color: white;color: #18d26e;"href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled" ><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    
+</div>
+      {% endblock content %}
